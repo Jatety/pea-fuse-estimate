@@ -1,0 +1,1566 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PEA Fuse Estimate — V68 Real Photo Compact</title>
+<style>
+:root{--navy:#162238;--blue:#2563eb;--bg:#eef4fb;--card:#fff;--line:#d8e1ec;--text:#182230;--muted:#64748b;--ht:#ef4444;--lt:#38bdf8;--tr:#eab308}
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}button{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:700}
+button.primary{background:var(--blue);color:#fff}button.secondary{background:#e8eef7;color:#243247}button.danger{background:#fee2e2;color:#b91c1c}
+.top{height:58px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.logo{font-size:18px;font-weight:800}.top small{color:#b9c5d6}
+.app{max-width:1400px;margin:auto;padding:20px}.page{display:none}.page.active{display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px #17203312}
+.hero{min-height:360px;display:grid;place-items:center;text-align:center;padding:35px}
+.hero h1{font-size:38px;margin:10px 0}.hero p{color:var(--muted)}
+.badge{display:inline-block;background:#e9f1ff;color:#1d4ed8;padding:6px 10px;border-radius:99px;font-size:12px;font-weight:800}
+.namebox{max-width:700px;margin:40px auto;padding:28px}.namebox h2{margin-top:0}
+label{display:block;font-weight:700;margin:12px 0 6px}.input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;background:#fff}
+.typegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 20px}.type{background:#f8fafc;border:2px solid #e2e8f0}.type.selected{border-color:var(--blue);background:#eff6ff}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.toolbar .spacer{flex:1}
+.workspace-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px}.workspace-grid.single .sidebar{width:100%}.canvas{min-height:720px;padding:18px;background:linear-gradient(#dff1ff 0 62%,#dcefd4 62%);position:relative;overflow:hidden}
+.pole{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);width:72px;height:520px;background:linear-gradient(90deg,#b9bec7,#f3f5f7,#aeb4bf);clip-path:polygon(36% 0,64% 0,78% 100%,22% 100%);border-radius:6px}
+.crossarm{position:absolute;left:50%;bottom:475px;transform:translateX(-50%);width:370px;height:26px;background:#344054;border-radius:5px}
+.sidebar{display:flex;flex-direction:column;gap:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}.panel h3{margin:0 0 10px}.point-list{display:flex;flex-direction:column;gap:8px}
+.point-card{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:10px;padding:5px 8px}.point-main{flex:1;min-width:0}.point-name-input{width:50%;min-width:0}.point-actions{display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0}.point-card.active{border-color:var(--blue);background:#eff6ff}
+.item-list{max-height:none;overflow:visible}.item-group{border:1px solid var(--line);border-radius:12px;margin-bottom:9px;overflow:hidden}.group-head{padding:10px 12px;font-weight:800}.group-head.ht{background:#fee2e2;color:#b91c1c;border-left:5px solid var(--ht)}.group-head.lt{background:#e0f2fe;color:#0369a1;border-left:5px solid var(--lt)}.group-head.tr{background:#fef9c3;color:#854d0e;border-left:5px solid var(--tr)}
+.item-labels{display:grid;grid-template-columns:105px minmax(180px,1fr) 90px 90px 105px 55px 180px 34px;gap:6px;padding:8px;background:#f8fafc;border-top:1px solid #edf1f5;border-bottom:1px solid #e2e8f0;font-weight:700;font-size:13px;color:#475569;align-items:center}.item-row{display:grid;grid-template-columns:105px minmax(180px,1fr) 90px 90px 105px 55px 180px 34px;gap:6px;padding:8px;border-top:1px solid #edf1f5;align-items:center}.item-row input{min-width:0;width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:8px}.item-row .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.item-row .qty{min-width:65px;-moz-appearance:textfield}.item-row .qty::-webkit-outer-spin-button,.item-row .qty::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.item-labels .build{color:#166534}.item-labels .remove{color:#b91c1c}.item-labels .reuse{color:#1d4ed8}
+.mini{font-size:12px;color:var(--muted)}.empty{padding:24px;text-align:center;color:var(--muted)}
+.modal{position:fixed;inset:0;background:#0f172a99;display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal.show{display:flex}.modal-box{width:min(1000px,96vw);max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:18px}.modal-head{display:flex;align-items:center;justify-content:space-between}.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}.tab{background:#eef2f7}.tab.active{background:var(--navy);color:#fff}
+.dept-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.dept{padding:12px;border:2px solid #e2e8f0;background:#fff}.dept.ht.active{border-color:var(--ht);background:#fff1f2;color:#b91c1c}.dept.lt.active{border-color:var(--lt);background:#f0f9ff;color:#0369a1}.dept.tr.active{border-color:var(--tr);background:#fefce8;color:#854d0e}
+.search{margin-bottom:12px}.choice{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px;margin:6px 0}.choice:hover{background:#f8fafc}.choice .title{font-weight:800}.choice .desc{font-size:12px;color:var(--muted)}
+.set-choice{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);margin:7px 0}.set-choice:hover{border-color:var(--blue);background:#f8fbff}
+.set-items{margin:8px 0 12px 18px;padding:10px;background:#f8fafc;border-radius:8px;font-size:13px;display:none}.set-items.open{display:block}
+.status{font-size:12px;padding:5px 9px;border-radius:99px;background:#dcfce7;color:#166534;font-weight:800}.add-count{display:inline-block;margin:0 0 8px 8px;color:#16a34a;font-size:13px;font-weight:800;vertical-align:middle}.status.bad{background:#fee2e2;color:#991b1b}
+.dbbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.summary table{width:100%;border-collapse:collapse}.summary th,.summary td{border-bottom:1px solid var(--line);padding:9px;text-align:left}.summary th{background:#f8fafc}
+.real-photo-panel{margin-top:16px;border:1px solid #bfdbfe;border-radius:14px;background:#eff6ff;padding:14px}.real-photo-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.real-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}.real-photo-card{background:#fff;border:1px solid #dbeafe;border-radius:12px;padding:10px;overflow:hidden}.real-photo-card img{display:block;width:100%;height:150px;object-fit:contain;background:#f8fafc;border-radius:9px;cursor:zoom-in}.real-photo-code{font-weight:800;margin-top:8px}.real-photo-name{font-size:12px;color:#475569;margin-top:3px;line-height:1.35}.real-photo-empty{padding:18px;border-radius:10px;background:#fff;color:#64748b;text-align:center}
+.notice{padding:10px;border-radius:9px;background:#fff7ed;color:#9a3412;font-size:13px}
+
+.sim2d-box{width:min(1500px,97vw);height:min(900px,94vh);max-height:94vh;padding:0;overflow:hidden;display:flex;flex-direction:column}
+.sim2d-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sim2d-head .spacer{flex:1}
+.sim2d-layout{display:grid;grid-template-columns:320px 1fr;min-height:0;flex:1}
+.sim2d-list{border-right:1px solid var(--line);padding:14px;overflow:auto;background:#f8fafc}
+.sim2d-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px;cursor:pointer}
+.sim2d-card:hover{border-color:#2563eb;box-shadow:0 4px 12px #17203318}.sim2d-card.placed{background:#f0fdf4;border-color:#86efac}.sim2d-card.left-selected{outline:2px solid #2563eb;outline-offset:1px}
+.sim2d-thumb{height:120px;border:1px dashed #cbd5e1;border-radius:9px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff}
+.sim2d-thumb img{max-width:96%;max-height:96%;object-fit:contain}
+.sim2d-title{font-weight:800;line-height:1.35}
+.sim2d-meta{font-size:12px;color:#64748b;margin-top:4px}
+.sim2d-stage-wrap{display:flex;flex-direction:column;min-width:0;min-height:0}
+.sim2d-tools{padding:10px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sim2d-stage{position:relative;flex:1;overflow:hidden;background:#fff;background-image:linear-gradient(#dbe7f3 1px,transparent 1px),linear-gradient(90deg,#dbe7f3 1px,transparent 1px);background-size:28px 28px}
+
+.sim2d-select-arrow{display:none;position:absolute;left:-16px;top:-18px;z-index:20;
+  width:20px;height:20px;line-height:20px;text-align:center;font-size:18px;font-weight:900;
+  color:#2563eb;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
+.sim2d-object.selected .sim2d-select-arrow{display:block}
+.sim2d-object{position:absolute;left:80px;top:80px;width:max-content;height:max-content;padding:0;border:0!important;border-radius:0;cursor:grab;touch-action:none;user-select:none;transform-origin:center center;overflow:visible;background:transparent!important;outline:none;pointer-events:auto}
+.sim2d-object.selected{border:0!important;outline:none!important;box-shadow:none!important}
+.sim2d-object img{display:block;pointer-events:none;user-select:none;cursor:grab;touch-action:none;max-width:none;max-height:none}
+.sim2d-label{position:absolute;left:50%;bottom:-3px;transform:translate(-50%,100%);white-space:nowrap;background:#fff;border:1px solid #cbd5e1;border-radius:5px;padding:2px 5px;font-size:10px;font-weight:700;pointer-events:none}
+@media(max-width:950px){.item-row{grid-template-columns:90px 1fr 65px 65px 65px 50px 65px 32px}.canvas{min-height:450px}}
+@media(max-width:650px){.typegrid,.dept-buttons{grid-template-columns:1fr}.item-row{grid-template-columns:1fr 1fr 70px 70px 70px 50px 65px 32px}.item-row .name{white-space:normal}}
+</style>
+<style id="background-media-style">
+#dynamicBgLayer{display:none!important}
+/* Background is applied to BODY itself so it can never cover the game UI. */
+body{background-color:var(--bg);background-repeat:no-repeat;background-position:center center;background-size:cover;background-attachment:fixed;}
+</style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<style id="real-photo-small-fix">
+.real-photo-inline{
+  display:block;
+  width:140px !important;
+  height:140px !important;
+  max-width:140px !important;
+  max-height:140px !important;
+  object-fit:contain;
+  margin-top:6px;
+  border:1px solid #dbe4f0;
+  border-radius:6px;
+  background:#f8fafc;
+  cursor:pointer;
+}
+.material-real-photo{
+  display:none;
+  margin-top:8px;
+  padding:8px;
+  border:1px solid #dbeafe;
+  border-radius:9px;
+  background:#f8fafc;
+}
+.material-real-photo.show{display:block}
+.material-real-photo img{
+  display:block;
+  width:140px;
+  height:140px;
+  object-fit:contain;
+  border:1px solid #dbe4f0;
+  border-radius:6px;
+  background:#fff;
+  cursor:pointer;
+}
+.material-real-photo .empty{
+  padding:8px;
+  text-align:left;
+  font-size:12px;
+}
+.set-item-real-photo-row{padding:4px 0 8px;border-bottom:1px solid #e5e7eb}.set-item-real-photo-row:last-child{border-bottom:0}
+.set-real-photo{display:none;margin-top:6px;padding:6px;border:1px solid #dbeafe;border-radius:8px;background:#f8fafc}
+.set-real-photo.show{display:block}
+.set-real-photo img{display:block;width:120px;height:120px;object-fit:contain;border:1px solid #dbe4f0;border-radius:6px;background:#fff;cursor:pointer}
+
+.real-photo-missing{
+  display:block;
+  margin-top:6px;
+  font-size:11px;
+  color:#94a3b8;
+}
+</style>
+</head>
+<body>
+<div id="dynamicBgLayer" aria-hidden="true"><img alt=""><video muted autoplay loop playsinline preload="auto"></video></div>
+<header><div class="logo">PEA Fuse Estimate — Pole Builder</div><div><small id="dbHeader">กำลังเชื่อมต่อฐานข้อมูล…</small></div></header>
+
+<div class="app">
+<section id="home" class="page active">
+  <div class="card hero">
+    <div>
+      <div class="badge">PEA FUSE ESTIMATE</div>
+      <h1>สร้างงานประมาณการ</h1>
+      <p>เวอร์ชันนี้ยึดหน้าตาและวิธีทำงานของ V9 และให้ Google Sheets เป็นฐานข้อมูลหลัก</p>
+      <button class="primary" onclick="openNewJob()">＋ สร้างงานใหม่</button>
+      <button class="secondary" onclick="openImportExcel()">📂 Import Excel</button>
+      <button id="resumeJobBtn" class="secondary" style="display:none;margin-left:6px" onclick="resumeJob()">▶ ทำงานเดิมต่อ</button>
+      
+    </div>
+  </div>
+</section>
+
+<section id="builder" class="page">
+  <div class="toolbar"><button class="secondary" onclick="showPage('home')">← หน้าหลัก</button><div class="spacer"></div><button type="button" class="primary" onclick="openSimulation2D()">🧩 จำลองการติดตั้ง</button><button type="button" class="primary" onclick="showSummary()">📊 สรุปรายการของ</button><button type="button" class="primary" onclick="showDeptSummary()">📊 สรุปรายการของแยกแผนก</button><button type="button" class="primary" onclick="exportExcelDirect()">⬇ Export Excel</button><span id="jobTitle" class="badge"></span></div>
+  <div class="workspace-grid single">
+    <div class="sidebar">
+      <div class="panel"><h3>จุดของงาน</h3><div id="points" class="point-list"></div><div class="copy-point-actions" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="primary" onclick="addPoint()">＋ เพิ่มจุด</button> <button class="secondary" onclick="copyPreviousPoint()">＋ คัดลอกจุดก่อนหน้า</button></div></div>
+    </div>
+    <div class="maincontent">
+      <div class="panel"><h3>รายการจุด</h3><div class="mini">เลือกจุดแล้วกดเพิ่มอุปกรณ์ รายการจาก Google Sheet จะถูกใช้เป็นเทมเพลทและแก้ไขได้</div><div id="items" class="item-list"></div><button class="primary" onclick="openEquipment()">＋ เพิ่มอุปกรณ์</button></div>
+    </div>
+  </div>
+</section>
+
+<section id="summary" class="page">
+ <div class="toolbar"><button class="secondary" onclick="showPage('builder')">← กลับงาน</button><div class="spacer"></div><button id="realPhotoToggleBtn" class="secondary" onclick="toggleRealPhotos()">📷 แสดงภาพของจริง</button><button class="primary" onclick="window.print()">พิมพ์ / บันทึก PDF</button></div>
+ <div class="card summary" style="padding:18px"><h2>สรุปรายการของ</h2><div id="summaryBody"></div></div></div>
+</section>
+
+<section id="deptSummary" class="page">
+ <div class="toolbar"><button class="secondary" onclick="showPage('builder')">← กลับงาน</button><div class="spacer"></div><button class="primary" onclick="window.print()">พิมพ์ / บันทึก PDF</button></div>
+ <div class="card summary" style="padding:18px"><h2>สรุปผลรายการแบบแยกแผนก</h2><div id="deptSummaryBody"></div></div>
+</section>
+</div>
+
+<div id="newJobModal" class="modal"><div class="modal-box" style="max-width:600px">
+ <div class="modal-head"><h2>สร้างงานใหม่</h2><button class="secondary" onclick="closeModal('newJobModal')">ปิด</button></div>
+ <label>ชื่องาน</label><input id="newJobName" class="input" placeholder="เช่น งานขยายเขตไฟฟ้า บ้าน...">
+ <button class="primary" style="margin-top:16px" onclick="createJob()">เริ่มงาน →</button>
+</div></div>
+
+<div id="importExcelModal" class="modal"><div class="modal-box" style="max-width:650px">
+  <div class="modal-head"><h2>Import Excel</h2><button class="secondary" onclick="closeModal('importExcelModal')">ปิด</button></div>
+  <div class="notice">เลือกไฟล์ Excel ที่ Export จากโปรแกรมนี้ เพื่อโหลดงานกลับมาแก้ไขต่อ</div>
+  <input id="importExcelFile" type="file" accept=".xlsx,.xls" class="input" style="margin-top:14px">
+  <button class="primary" style="margin-top:14px" onclick="importExcelFile()">📥 โหลดงานจาก Excel</button>
+  <div id="importExcelStatus" class="mini" style="margin-top:12px"></div>
+</div></div>
+
+<div id="equipmentModal" class="modal"><div class="modal-box">
+ <div class="modal-head"><h2>เพิ่มอุปกรณ์</h2><button class="secondary" onclick="closeModal('equipmentModal')">ปิด</button></div>
+ <div class="tabs"><button id="tabMaterial" class="tab active" onclick="switchEquipTab('material')">📦 อุปกรณ์รายชิ้น</button><button id="tabSet" class="tab" onclick="switchEquipTab('set')">🧰 ชุดอุปกรณ์</button><button id="tabManual" class="tab" onclick="switchEquipTab('manual')">✏️ เพิ่มเอง</button><button id="equipmentRealPhotoToggle" type="button" class="tab" onclick="toggleEquipmentRealPhotos()">📷 รูปจริง</button></div>
+ <div id="deptArea"><div class="mini">เลือกแผนกก่อน แล้วรายการจะดึงจาก Google Sheet โดยตรง</div>
+ <div class="dept-buttons"><button class="dept ht active" onclick="chooseDept('HT')">🔴 HT — แรงสูง</button><button class="dept lt" onclick="chooseDept('LT')">🔵 LT — แรงต่ำ</button><button class="dept tr" onclick="chooseDept('TR')">🟡 TR — หม้อแปลง</button></div></div>
+ <div id="equipmentContent"></div>
+</div></div>
+
+<div id="dbModal" class="modal"><div class="modal-box" style="max-width:720px">
+ <div class="modal-head"><h2>สถานะฐานข้อมูล</h2><button class="secondary" onclick="closeModal('dbModal')">ปิด</button></div>
+ <div id="dbStatusBody"></div>
+ <button class="primary" onclick="loadDatabase()">↻ โหลดข้อมูลใหม่</button>
+</div></div>
+
+
+<div id="simulation2DModal" class="modal">
+  <div class="modal-box sim2d-box">
+    <div class="sim2d-head">
+      <b style="font-size:18px">🧩 จำลองการติดตั้ง</b>
+      <span id="sim2dPoint" class="badge"></span>
+      <span id="sim2dCount" class="mini"></span>
+      <div class="spacer"></div>
+      <button id="sim2dRotateLeftBtn" class="secondary" onclick="sim2dRotate(-15)">↶ -15°</button>
+      <button id="sim2dRotateRightBtn" class="secondary" onclick="sim2dRotate(15)">↷ +15°</button>
+      <button id="sim2dMirrorBtn" class="secondary" onclick="sim2dMirror()">↔ กลับซ้าย/ขวา</button>
+      <button class="danger" onclick="sim2dDeleteSelected()">✕ ลบชิ้นที่เลือก</button>
+      <button class="secondary" onclick="closeModal('simulation2DModal')">ปิด</button>
+    </div>
+    <div class="sim2d-layout">
+      <aside class="sim2d-list">
+        <h3 style="margin:0 0 7px">อุปกรณ์ที่มีภาพ 2D</h3>
+        <div class="mini" style="margin-bottom:10px">แสดงเฉพาะรายการที่ <b>ก่อสร้าง &gt; 0</b> และมี File ID ในคอลัมน์ <b>ภาพ2D</b> · ขนาดสัมพันธ์กับเสา 12.20 ม.</div>
+        <div id="sim2dList"></div>
+      </aside>
+      <section class="sim2d-stage-wrap">
+        <div class="sim2d-tools">
+          <span class="mini">คลิก/ลากที่ตัวภาพโดยตรง · Delete = ลบ · R = หมุน 15° · ↔ = กลับซ้าย/ขวา</span>
+          <div style="flex:1"></div>
+          <button class="secondary" onclick="sim2dClear()">ล้างทั้งหมด</button>
+        </div>
+        <div id="sim2dStage" class="sim2d-stage"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+const SHEET_ID="1sRCRJjikXryfqhv9LZSEPsKCVjTE6Yln-H5L-nOrEyQ";
+const SHEETS=["MATERIALS(HT)","MATERIALS(LT)","MATERIALS(TR)","SETS","SET_ITEMS"];
+const DB={materials:{HT:[],LT:[],TR:[]},sets:[],items:[],ready:false,errors:[]};
+let job=null,currentPoint=0,equipTab="material",selectedDept="HT";
+let additionalTarget=null;
+
+function getSetDisplayName(setObj){
+ const s=setObj||{};
+ return s.name||s.setName||s.title||s.set_name||s["ชื่อชุด"]||s["ชื่อชุดอุปกรณ์"]||s["Set Name"]||s["SET_NAME"]||"ชุดอุปกรณ์";
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+const DRAFT_KEY="pea_fuse_estimate_active_job_v1";
+let draftDirty=false;
+let newJobPendingSave=false;
+function saveJobDraft(force=false){
+ try{
+  if(!job)return;
+  if(newJobPendingSave && !force)return;
+  localStorage.setItem(DRAFT_KEY,JSON.stringify({job,currentPoint,savedAt:Date.now()}));
+  draftDirty=false;
+  updateResumeButton();
+ }catch(e){console.warn("save draft failed",e)}
+}
+function loadJobDraft(){
+ try{
+  const raw=localStorage.getItem(DRAFT_KEY);
+  if(!raw)return null;
+  const d=JSON.parse(raw);
+  if(!d||!d.job||!Array.isArray(d.job.points))return null;
+  job=d.job;
+  newJobPendingSave=false;
+  currentPoint=Math.max(0,Math.min(Number(d.currentPoint)||0,job.points.length-1));
+  return job;
+ }catch(e){console.warn("load draft failed",e);return null}
+}
+function updateResumeButton(){
+ const b=document.getElementById("resumeJobBtn");
+ if(!b)return;
+ let saved=null;
+ try{const raw=localStorage.getItem(DRAFT_KEY);if(raw){const d=JSON.parse(raw);if(d&&d.job&&Array.isArray(d.job.points))saved=d.job;}}catch(e){}
+ const has=!!(saved&&saved.name&&Array.isArray(saved.points));
+ b.style.display=has?"inline-block":"none";
+ if(has)b.textContent=`▶ ทำงานเดิมต่อ — ${saved.name}`;
+}
+function resumeJob(){
+ job=null;
+ loadJobDraft();
+ if(!job)return;
+ const currentName=String(job.name||"").trim();
+ const editedName=window.prompt("แก้ชื่องานที่จะทำงานต่อได้ (กด ยกเลิก เพื่อใช้ชื่อเดิม)",currentName);
+ if(editedName===null)return;
+ const newName=editedName.trim();
+ if(!newName)return alert("กรุณาใส่ชื่องาน");
+ job.name=newName;
+ saveJobDraft();
+ renderJob();
+ showPage("builder");
+}
+function showPage(id){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ if(id==="home")updateResumeButton();
+ if(typeof updateBackgroundForPage==="function")updateBackgroundForPage(id);
+}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+function openNewJob(){document.getElementById("newJobName").value="";document.getElementById("newJobModal").classList.add("show");setTimeout(()=>document.getElementById("newJobName").focus(),50)}
+function createJob(){let n=document.getElementById("newJobName").value.trim();if(!n)return alert("กรุณาใส่ชื่องาน");job={name:n,points:[{note:"",items:[]} ]};currentPoint=0;newJobPendingSave=true;closeModal("newJobModal");renderJob();showPage("builder")}
+
+// ป้องกันการกดรีเฟรช/ปิดแท็บโดยไม่ตั้งใจ และบันทึกงานไว้ก่อนออก
+window.addEventListener("beforeunload",function(e){
+ if(job){saveJobDraft();e.preventDefault();e.returnValue="";}
+});
+// ถ้าเปิดหน้าใหม่/รีเฟรช ให้กู้คืนงานล่าสุดอัตโนมัติจากเครื่อง
+const __savedJob=loadJobDraft();
+if(__savedJob){draftDirty=false;}
+updateResumeButton();
+
+function copyPreviousPoint(){
+  if(!job || !Array.isArray(job.points) || job.points.length===0){
+    alert("ยังไม่มีจุดก่อนหน้าให้คัดลอก");
+    return;
+  }
+  const prev = job.points[job.points.length-1];
+  const copy = JSON.parse(JSON.stringify(prev));
+  copy.id = "P" + Date.now();
+  copy.pointNo = (Math.max(...job.points.map(p=>Number(p.pointNo)||0),0) + 1);
+  job.points.push(copy);
+  currentPoint = job.points.length - 1;
+  saveJobDraft();
+  renderJob();
+}
+function addPoint(){
+ if(!job)return;
+ const nums=job.points.map(p=>Number(p.pointNo)||0);
+ const next=(nums.length?Math.max(...nums):0)+1;
+ job.points.push({id:"P"+Date.now(),pointNo:next,pointName:"จุดที่ "+next,note:"",items:[]});
+ currentPoint=job.points.length-1;
+ saveJobDraft();
+ renderJob();
+}
+function deletePoint(i){
+ i=Number(i);
+ if(!job || !Array.isArray(job.points) || !Number.isInteger(i) || i<0 || i>=job.points.length) return;
+ job.points.splice(i,1);
+ if(job.points.length===0){
+   currentPoint=-1;
+ }else if(currentPoint>i){
+   currentPoint--;
+ }else if(currentPoint>=job.points.length){
+   currentPoint=job.points.length-1;
+ }
+ saveJobDraft();
+ renderJob();
+}
+function ensurePointNumbers(){
+ if(!job||!Array.isArray(job.points))return;
+ let max=0;
+ job.points.forEach(p=>{if(!Number(p.pointNo))p.pointNo=++max;else max=Math.max(max,Number(p.pointNo)); if(!p.pointName)p.pointName="จุดที่ "+p.pointNo;});
+}
+function renderJob(){ensurePointNumbers();document.getElementById("jobTitle").textContent=job?.name||"";renderPoints();renderItems()}
+function renderPoints(){
+ const box=document.getElementById("points");
+ if(!box)return;
+ if(!job || !Array.isArray(job.points) || job.points.length===0){
+   box.innerHTML='<div class="empty">ยังไม่มีจุด — กด ＋ เพิ่มจุด เพื่อเริ่มงาน</div>';
+   return;
+ }
+ box.innerHTML=job.points.map((p,i)=>{
+   const displayName=p.pointName || ("จุดที่ "+(p.pointNo||i+1));
+   return `
+   <div class="point-card ${i===currentPoint?"active":""}" onclick="selectPoint(${i})">
+     <div class="point-main">
+       <input class="point-name-input" value="${String(displayName).replace(/"/g,'&quot;')}"
+         onclick="event.stopPropagation()"
+         onchange="renamePoint(${i},this.value)"
+         onkeydown="if(event.key==='Enter'){this.blur();}">
+       <div class="mini">${(p.items||[]).length} รายการ</div>
+     </div>
+     <div class="point-actions">
+       <button type="button" class="secondary" onclick="copyThisPoint(event,${i})">ซ้ำ</button>
+       <button type="button" class="danger" onclick="deletePointClick(event,${i})">ลบ</button>
+     </div>
+   </div>`;
+ }).join("");
+}
+function selectPoint(i){
+ currentPoint=Number(i);
+ saveJobDraft();
+ renderJob();
+}
+function renamePoint(i,name){
+ if(!job||!job.points[i])return;
+ name=String(name||"").trim();
+ job.points[i].pointName=name || ("จุดที่ "+(job.points[i].pointNo||i+1));
+ saveJobDraft();
+ renderPoints();
+}
+function deletePointClick(e,i){
+ if(e){e.preventDefault();e.stopPropagation();}
+ deletePoint(i);
+}
+function copyThisPoint(e,i){
+ if(e){e.preventDefault();e.stopPropagation();}
+ if(!job||!job.points[i])return;
+ const src=job.points[i];
+ const copy=JSON.parse(JSON.stringify(src));
+ const maxNo=Math.max(...job.points.map(p=>Number(p.pointNo)||0),0);
+ copy.id="P"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
+ copy.pointNo=maxNo+1;
+ copy.pointName="จุดที่ "+copy.pointNo;
+ // Make a copied point independent; edits to quantities/notes won't affect source.
+ job.points.push(copy);
+ currentPoint=i+1;
+ saveJobDraft();
+ renderJob();
+}
+function renderItems(){
+ let p=job.points[currentPoint];
+ if(!p){
+   document.getElementById("items").innerHTML='<div class="empty">ยังไม่มีจุดในงานนี้ — กด ＋ เพิ่มจุด เพื่อเริ่มงาน</div>';
+   return;
+ }
+ let groups={};
+ p.items.forEach((x,i)=>{let key=x.sourceType==="set"?(x.dept+"|"+x.set+"|"+(x.setInstance||"")):(x.dept+"|direct");(groups[key]??=[]).push({x,i})});
+ let keys=Object.keys(groups);
+ document.getElementById("items").innerHTML=keys.length?keys.map(k=>{
+   let arr=groups[k], first=arr[0].x, dept=first.dept||"HT", cls=dept.toLowerCase();
+   let title=first.sourceType==="set"?`${esc(first.set||"ชุดอุปกรณ์")} — ${esc(first.setName||"")}`:"รายการพัสดุรายชิ้น";
+   return `<div class="item-group"><div class="group-head ${cls}">${dept==="HT"?"🔴":dept==="LT"?"🔵":"🟡"} ${title}</div>
+   <div class="item-labels"><div>รหัสพัสดุ</div><div>ชื่ออุปกรณ์</div><div class="build">ก่อสร้าง</div><div class="remove">รื้อถอน</div><div class="reuse">นำกลับมาใช้</div><div>หน่วย</div><div>หมายเหตุ</div><div></div></div>
+   ${arr.map(({x,i})=>`<div class="item-row">
+   <input value="${esc(x.code)}" title="รหัสพัสดุ" onchange="editItem(${i},'code',this.value)">
+   <input class="name" value="${esc(x.name)}" title="ชื่อรายการ" onchange="editItem(${i},'name',this.value)">
+   <input class="qty" type="number" step="0.01" value="${x.build??""}" title="ก่อสร้าง" onchange="editItem(${i},'build',this.value)">
+   <input class="qty" type="number" step="0.01" value="${x.remove??""}" title="รื้อถอน" onchange="editItem(${i},'remove',this.value)">
+   <input class="qty" type="number" step="0.01" value="${x.reuse??""}" title="นำกลับมาใช้" onchange="editItem(${i},'reuse',this.value)">
+   <input value="${esc(x.unit)}" title="หน่วย" onchange="editItem(${i},'unit',this.value)">
+   <input value="${esc(x.note)}" title="หมายเหตุ" onchange="editItem(${i},'note',this.value)">
+   <button class="danger" onclick="removeItem(${i})">×</button></div>`).join("")}
+   ${first.sourceType==="set"?`<div style="padding:8px 8px 10px"><button type="button" class="secondary" onclick="openAdditionalEquipment('${esc(first.setInstance||"")}','${esc(dept)}','${esc(first.set||"")}','${esc(first.setName||"")}')">＋ เพิ่มรายการ</button></div>`:""}</div>`;
+ }).join(""):`<div class="empty">ยังไม่มีรายการในจุดนี้</div>`;
+}
+function editItem(i,k,v){let x=job.points[currentPoint].items[i];x[k]=["build","remove","reuse"].includes(k)?(Number(v)||0):v;saveJobDraft()}
+function removeItem(i){job.points[currentPoint].items.splice(i,1);saveJobDraft();renderJob()}
+function openEquipment(){
+ additionalTarget=null;
+ document.getElementById("tabSet").style.display="";
+ document.getElementById("tabManual").style.display="";
+ document.getElementById("equipmentModal").classList.add("show");
+ switchEquipTab("material");
+}
+function openAdditionalEquipment(setInstance,dept,setCode,setName){
+ additionalTarget={setInstance:String(setInstance||""),dept:String(dept||"HT"),set:String(setCode||""),setName:String(setName||"")};
+ selectedDept=additionalTarget.dept;
+ document.querySelectorAll(".dept").forEach(b=>b.classList.remove("active"));
+ const deptBtn=document.querySelector(".dept."+additionalTarget.dept.toLowerCase());
+ if(deptBtn)deptBtn.classList.add("active");
+ document.getElementById("tabSet").style.display="none";
+ document.getElementById("tabManual").style.display="none";
+ document.getElementById("equipmentModal").classList.add("show");
+ switchEquipTab("material");
+}
+let equipmentRealPhotos=false;
+function switchEquipTab(t){equipTab=t;document.getElementById("tabMaterial").classList.toggle("active",t==="material");document.getElementById("tabSet").classList.toggle("active",t==="set");document.getElementById("tabManual").classList.toggle("active",t==="manual");document.getElementById("deptArea").style.display=t==="manual"?"none":"block";renderEquipmentContent()}
+function toggleEquipmentRealPhotos(){
+ equipmentRealPhotos=!equipmentRealPhotos;
+ const btn=document.getElementById("equipmentRealPhotoToggle");
+ if(btn){btn.textContent=equipmentRealPhotos?"✕ ซ่อนรูป":"📷 รูปจริง";btn.classList.toggle("active",equipmentRealPhotos)}
+ document.querySelectorAll(".material-real-photo,.set-real-photo").forEach(el=>el.classList.toggle("show",equipmentRealPhotos));
+}
+function chooseDept(d){selectedDept=d;document.querySelectorAll(".dept").forEach(b=>b.classList.remove("active"));document.querySelector(".dept."+d.toLowerCase()).classList.add("active");renderEquipmentContent()}
+function renderEquipmentContent(){
+ const c=document.getElementById("equipmentContent");
+ if(equipTab==="manual"){c.innerHTML=`<label>แผนก</label><select id="mDept" class="input"><option>HT</option><option>LT</option><option>TR</option></select><label>รหัสพัสดุ</label><input id="mCode" class="input"><label>ชื่ออุปกรณ์</label><input id="mName" class="input"><label>หน่วย</label><input id="mUnit" class="input" value="EA"><label>จำนวนก่อสร้าง</label><input id="mQty" class="input" type="number" step="0.01" value="1"><button class="primary" style="margin-top:14px" onclick="addManual()">＋ เพิ่มรายการ</button>`;return}
+ if(equipTab==="material"){let arr=DB.materials[selectedDept]||[];c.innerHTML=`<input id="materialSearch" class="input search" placeholder="ค้นหาชื่อรายการ / รหัสพัสดุ" oninput="renderMaterialChoices()"><div id="materialChoices"></div>`;renderMaterialChoices();return}
+ let sets=DB.sets.filter(s=>!s.dept||s.dept===selectedDept);
+ c.innerHTML=`<input id="setSearch" class="input search" placeholder="ค้นหารหัสชุด / ชื่อชุด" oninput="renderSetChoices()"><div id="setChoices"></div>`;renderSetChoices();
+}
+function getMaterialAddCount(code){
+ let p=job?.points?.[currentPoint];
+ if(!p)return 0;
+ return p.items.filter(x=>x.sourceType==="direct"&&String(x.code)===String(code)).length;
+}
+function getSetAddCount(code){
+ let p=job?.points?.[currentPoint];
+ if(!p)return 0;
+ return new Set(p.items.filter(x=>x.sourceType==="set"&&String(x.set)===String(code)&&x.setInstance).map(x=>x.setInstance)).size;
+}
+function updateAddCount(kind,code,count){
+ let cls=kind==="set"?"set-count":"material-count";
+ document.querySelectorAll(`.${cls}[data-code]`).forEach(el=>{
+   if(String(el.dataset.code)===String(code)) el.textContent=count>0?`เพิ่มแล้ว ${count} ครั้ง`:"";
+ });
+}
+function renderMaterialChoices(){
+ let q=(document.getElementById("materialSearch")?.value||"").toLowerCase();
+ let arr=(DB.materials[selectedDept]||[]).filter(m=>(String(m.code)+" "+String(m.name)).toLowerCase().includes(q)).slice(0,300);
+ document.getElementById("materialChoices").innerHTML=arr.map((m,i)=>`<div class="choice">
+   <div style="min-width:0;flex:1">
+     <div class="title" style="font-weight:800">${esc(m.name)}</div>
+     <div class="desc" style="font-weight:400">รหัสพัสดุ: ${esc(m.code)} · ${esc(m.unit||"")}</div>
+     <div class="material-real-photo${equipmentRealPhotos?" show":""}" data-photo="${esc(m.realPhoto||"")}">
+       ${m.realPhoto?`<img src="${esc(realPhotoUrl(m.realPhoto))}" alt="${esc(m.name||m.code)}" title="คลิกเพื่อเปิดภาพ" onclick="window.open(this.src,'_blank')" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="empty" style="display:none">โหลดภาพไม่ได้</div>`:`<div class="empty">ยังไม่มีภาพของจริง</div>`}
+     </div>
+   </div>
+   <div style="white-space:nowrap;display:flex;align-items:center;gap:6px">
+     <button type="button" class="primary add-material-btn" data-code="${esc(m.code)}">เพิ่ม</button>
+     <span class="add-count material-count" data-code="${esc(m.code)}">${getMaterialAddCount(m.code)>0?`เพิ่มแล้ว ${getMaterialAddCount(m.code)} ครั้ง`:""}</span>
+   </div>
+ </div>`).join("")||`<div class="empty">ไม่พบรายการ</div>`;
+}
+
+function addMaterial(code){
+ let deptForAdd=additionalTarget?additionalTarget.dept:selectedDept;
+ let m=(DB.materials[deptForAdd]||[]).find(x=>String(x.code)===String(code));
+ if(!m||!job||!job.points[currentPoint])return;
+ let p=job.points[currentPoint];
+ if(additionalTarget){
+   // เพิ่มรายการเข้า SET เดิมโดยใช้ setInstance เดิม จึงยังอยู่หัวข้อเดียวกัน
+   p.items.push({dept:additionalTarget.dept,code:m.code,name:m.name,unit:m.unit||"EA",note:"",build:"",remove:"",reuse:"",sourceType:"set",set:additionalTarget.set,setName:additionalTarget.setName,setInstance:additionalTarget.setInstance});
+ }else{
+   let directInstance="DIR_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
+   // รายชิ้นที่กดจากปุ่มหลัก = สร้างหัวข้อใหม่ตามพฤติกรรมเดิม
+   p.items.push({dept:selectedDept,code:m.code,name:m.name,unit:m.unit||"EA",note:"",build:"",remove:"",reuse:"",sourceType:"direct",directInstance:directInstance});
+ }
+ newJobPendingSave=false;
+ saveJobDraft();
+ renderJob();
+ updateAddCount("material",m.code,getMaterialAddCount(m.code));
+}
+// ใช้ event delegation เพื่อให้ปุ่ม "เพิ่ม" ทำงานแน่นอนแม้รายการถูกสร้างใหม่ด้วย innerHTML
+if(!window.__materialAddHandler){
+ window.__materialAddHandler=true;
+ document.addEventListener("click",function(e){
+   const btn=e.target.closest(".add-material-btn");
+   if(!btn)return;
+   e.preventDefault();e.stopPropagation();
+   addMaterial(btn.dataset.code);
+ });
+}
+function renderSetChoices(){let q=(document.getElementById("setSearch")?.value||"").toLowerCase();let sets=DB.sets.filter(s=>(!s.dept||s.dept===selectedDept)&&(s.code+" "+s.name).toLowerCase().includes(q));
+ document.getElementById("setChoices").innerHTML=sets.slice(0,300).map(s=>{let items=DB.items.filter(x=>x.dept===selectedDept&&x.set===s.code);return `<div><button class="set-choice" onclick="toggleSet('${esc(s.code)}')"><b>${esc(s.code)}</b> — ${esc(s.name||"ไม่พบชื่อชุด")} <span class="mini">(${items.length} รายการ)</span></button><div id="set-${CSS.escape(s.code)}" class="set-items">${items.length?items.map(x=>{const m=(DB.materials[selectedDept]||[]).find(mm=>String(mm.code)===String(x.code));const photo=m?String(m.realPhoto||"").trim():"";return `<div class="set-item-real-photo-row"><div>${esc(x.code)} — ${esc(x.name)} × ${x.qty} ${esc(x.unit||"")}</div><div class="set-real-photo${equipmentRealPhotos?" show":""}">${photo?`<img src="${esc(realPhotoUrl(photo))}" alt="${esc(x.name||x.code)}" title="คลิกเพื่อเปิดภาพ" onclick="window.open(this.src,'_blank')" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="empty" style="display:none">โหลดภาพไม่ได้</div>`:`<div class="empty">ยังไม่มีภาพของจริง</div>`}</div></div>`}).join(""):"ไม่มีรายการในชุด"}</div></div>`}).join("")||`<div class="empty">ไม่พบชุดอุปกรณ์</div>`}
+function toggleSet(code){let el=document.getElementById("set-"+CSS.escape(code));if(el)el.classList.toggle("open");let b=document.querySelector(`button.set-choice[onclick="toggleSet('${esc(code)}')"]`);if(b){b.insertAdjacentHTML("afterend",`<div style="white-space:nowrap"><button class="primary" style="margin:0 0 8px 0" onclick="addSet('${esc(code)}')">＋ เพิ่มชุดนี้ทั้งชุด</button><span class="add-count set-count" data-code="${esc(code)}">${getSetAddCount(code)>0?`เพิ่มแล้ว ${getSetAddCount(code)} ครั้ง`:""}</span></div>`);b.onclick=()=>{}}}
+function addSet(code){
+ let items=DB.items.filter(x=>x.dept===selectedDept&&x.set===code);
+ if(!items.length)return alert("ชุดนี้ไม่มีรายการในฐานข้อมูล");
+ let set=DB.sets.find(s=>s.code===code&&(!s.dept||s.dept===selectedDept));
+ let p=job.points[currentPoint];
+ let setInstance="SET_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
+ items.forEach(x=>{
+   p.items.push({
+     dept:selectedDept,
+     code:x.code,
+     name:x.name,
+     unit:x.unit||"EA",
+     note:x.note||"",
+     build:Number(x.qty)||0,
+     remove:0,
+     reuse:0,
+     sourceType:"set",
+     set:code,
+     setName:set?.name||"",
+     setInstance:setInstance
+   });
+ });
+ newJobPendingSave=false;
+ saveJobDraft();
+ renderJob();
+ updateAddCount("set",code,getSetAddCount(code));
+}
+function addManual(){let d=document.getElementById("mDept").value,c=document.getElementById("mCode").value.trim(),n=document.getElementById("mName").value.trim();if(!c||!n)return alert("กรุณาใส่รหัสและชื่ออุปกรณ์");job.points[currentPoint].items.push({dept:d,code:c,name:n,unit:document.getElementById("mUnit").value||"EA",note:"",build:"",remove:"",reuse:"",sourceType:"manual"});newJobPendingSave=false;saveJobDraft();renderJob()}
+
+function downloadBlobFile(filename, content, mime){
+ const blob=new Blob(["\uFEFF",content],{type:mime});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download=filename;
+ a.style.display="none";
+ document.body.appendChild(a);
+ a.click();
+ setTimeout(()=>{a.remove();URL.revokeObjectURL(url)},1000);
+}
+function openImportExcel(){
+  const input=document.getElementById("importExcelFile");
+  const status=document.getElementById("importExcelStatus");
+  if(input)input.value="";
+  if(status)status.textContent="";
+  document.getElementById("importExcelModal").classList.add("show");
+}
+
+function normalizeImportedNumber(v){
+  if(v===null||v===undefined||v==="")return "";
+  const n=Number(v);
+  return Number.isFinite(n)?n:v;
+}
+
+function importExcelFile(){
+  const input=document.getElementById("importExcelFile");
+  const status=document.getElementById("importExcelStatus");
+  const file=input?.files?.[0];
+  if(!file){alert("กรุณาเลือกไฟล์ Excel ก่อน");return;}
+  if(typeof XLSX==="undefined"){alert("ไม่พบระบบอ่าน Excel กรุณาเปิดไฟล์ด้วย Chrome/Edge และเชื่อมต่ออินเทอร์เน็ต");return;}
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const wb=XLSX.read(e.target.result,{type:"array",cellDates:false});
+      const names=wb.SheetNames||[];
+      const ws=wb.Sheets["ข้อมูลสำหรับ Import"] || wb.Sheets["รายการแยกตามจุด"];
+      if(!ws)throw new Error("ไม่พบ Sheet รายการแยกตามจุด หรือ ข้อมูลสำหรับ Import");
+      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:true});
+      let imported=null;
+      // Preferred: dedicated save-data sheet written by newer exports.
+      const saveRowIndex=rows.findIndex(r=>String(r[0]||"").trim()==="__PEA_FUSE_SAVE_JSON__");
+      if(saveRowIndex>=0){
+        // Excel จำกัดความยาวข้อความต่อ 1 cell ไว้ที่ 32,767 ตัวอักษร
+        // จึงเก็บ Save Game เป็นหลายแถว แล้วนำมาต่อกันตอน Import
+        const chunks=[];
+        for(let i=saveRowIndex;i<rows.length;i++){
+          const row=rows[i]||[];
+          if(i>saveRowIndex && String(row[0]||"").trim()==="หมายเหตุ")break;
+          if(i===saveRowIndex){
+            if(row[1]!==undefined && row[1]!==null)chunks.push(String(row[1]));
+          }else if(row[1]!==undefined && row[1]!==null && String(row[1])!==""){
+            chunks.push(String(row[1]));
+          }
+        }
+        if(!chunks.length)throw new Error("ไม่พบข้อมูล Save Game ใน Sheet ข้อมูลสำหรับ Import");
+        imported=JSON.parse(chunks.join(""));
+      }else{
+        imported=importLegacyPointSheet(rows);
+      }
+      if(!imported||!Array.isArray(imported.points))throw new Error("ไม่พบข้อมูลโครงสร้างงานที่นำเข้าได้");
+      if(!imported.name)imported.name=file.name.replace(/\.xlsx?$/i,"");
+      job=imported;
+      ensurePointNumbers();
+      currentPoint=Math.max(0,Math.min(Number(imported.currentPoint)||0,job.points.length-1));
+      newJobPendingSave=false;
+      saveJobDraft(true);
+      closeModal("importExcelModal");
+      renderJob();
+      showPage("builder");
+      alert("Import Excel สำเร็จ\nโหลดงาน: "+job.name+"\nจำนวนจุด: "+job.points.length);
+    }catch(err){
+      console.error(err);
+      if(status)status.textContent="Import ไม่สำเร็จ: "+(err.message||err);
+      alert("Import Excel ไม่สำเร็จ: "+(err.message||err));
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function importLegacyPointSheet(rows){
+  const points=[];
+  let current=null;
+  let pointNo=0;
+  let currentSet=null;
+  for(const r of rows){
+    const a=String(r[0]??"").trim(), b=String(r[1]??"").trim(), c=String(r[2]??"").trim();
+    if(!a && !b && !c)continue;
+    const m=a.match(/^จุดที่\s*(\d+)\s*[—-]\s*(.*)$/);
+    if(m){
+      pointNo=Number(m[1])||(++pointNo);
+      current={id:"P_IMPORT_"+Date.now()+"_"+pointNo,pointNo,pointName:m[2]||("จุดที่ "+pointNo),note:"",items:[]};
+      points.push(current); currentSet=null; continue;
+    }
+    if(!current)continue;
+    if(b==="ชุดรายการ"){
+      currentSet={code:"",name:c||"ชุดรายการ",instance:"IMP_SET_"+Date.now()+"_"+Math.random().toString(36).slice(2,7)};
+      continue;
+    }
+    if(a==="แผนก" && b==="รหัสพัสดุ")continue;
+    const code=b;
+    if(!code || a==="รายการแยกตามจุด" || a===current.pointName)continue;
+    current.items.push({
+      dept:a,code,name:c,build:normalizeImportedNumber(r[3]),remove:normalizeImportedNumber(r[4]),reuse:normalizeImportedNumber(r[5]),unit:String(r[6]||""),note:String(r[7]||""),
+      sourceType:currentSet?.code?"set":"direct",set:currentSet?.code||"",setName:currentSet?.name||"",setInstance:currentSet?.instance||""
+    });
+  }
+  return {name:"งานจาก Excel",points};
+}
+
+function exportExcelDirect(){
+ try{
+  if(!job||!Array.isArray(job.points)){alert("ยังไม่มีงานให้ Export");return;}
+  if(typeof XLSX==="undefined"){
+   alert("ไม่พบระบบสร้าง Excel กรุณาเปิดไฟล์ด้วย Chrome/Edge และเชื่อมต่ออินเทอร์เน็ต");
+   return;
+  }
+
+  const dep={HT:"HT — แรงสูง",LT:"LT — แรงต่ำ",TR:"TR — หม้อแปลง"};
+  const summaryHeader=["ลำดับที่","รหัสพัสดุ","ชื่อรายการ","ก่อสร้าง","รื้อถอน","นำกลับมาใช้","หน่วย","หมายเหตุ"];
+
+  // =====================================================
+  // Sheet 1: สรุปรวมรายการ — รวมทุกแผนกในตารางเดียว
+  // =====================================================
+  const totals=new Map();
+  job.points.forEach(p=>(p.items||[]).forEach(x=>{
+   const code=String(x.code||"").trim();
+   if(!code)return;
+   if(!totals.has(code)){
+    totals.set(code,{
+     code,
+     name:x.name||"",
+     build:0,remove:0,reuse:0,
+     unit:x.unit||"",
+     note:x.note||"",
+     depts:new Set()
+    });
+   }
+   const t=totals.get(code);
+   t.build+=Number(x.build)||0;
+   t.remove+=Number(x.remove)||0;
+   t.reuse+=Number(x.reuse)||0;
+   if(!t.name&&x.name)t.name=x.name;
+   if(!t.unit&&x.unit)t.unit=x.unit;
+   if(!t.note&&x.note)t.note=x.note;
+   if(x.dept)t.depts.add(x.dept);
+  }));
+
+  const summaryRows=[];
+  summaryRows.push([job.name||"งาน"]);
+  summaryRows.push([]);
+  summaryRows.push(summaryHeader);
+  [...totals.values()].forEach((x,i)=>summaryRows.push([
+   i+1,x.code,x.name,x.build,x.remove,x.reuse,x.unit,x.note
+  ]));
+
+  // =====================================================
+  // Sheet 2: รายการแยกตามจุด
+  // แสดงแต่ละจุด → ชุดที่ใช้ → รายการอุปกรณ์ในชุด
+  // ไม่รวมยอด/ไม่รวมรายการซ้ำภายในแต่ละจุด
+  // =====================================================
+  const pointRows=[];
+  // รูปแบบตามตัวอย่าง: A=แผนก, B=รหัสพัสดุ, C=ชื่ออุปกรณ์, D-G=จำนวน, H=หมายเหตุ
+  // ชื่อชุดจะแสดงแยกเป็นหัวข้อ โดย B ใช้คำว่า "ชุดรายการ"
+  const pointHeader=["แผนก","รหัสพัสดุ","ชื่ออุปกรณ์","ก่อสร้าง","รื้อถอน","นำกลับมาใช้","หน่วย","หมายเหตุ"];
+
+  pointRows.push([job.name||"งาน"]);
+  pointRows.push([]);
+  pointRows.push(["รายการแยกตามจุด"]);
+  pointRows.push([]);
+
+  job.points.forEach((p,i)=>{
+   const no=p.pointNo||i+1;
+   const pname=p.pointName||("จุดที่ "+no);
+   const items=p.items||[];
+
+   // หัวข้อจุด
+   pointRows.push([`จุดที่ ${no} — ${pname}`]);
+   if(!items.length){
+    pointRows.push(["ไม่มีรายการ"]);
+    pointRows.push([]);
+    return;
+   }
+
+   // จัดกลุ่มตาม SET ที่ถูกเพิ่มจริงในจุดนั้น โดยไม่รวมจำนวน
+   const groups=[];
+   const groupMap=new Map();
+   items.forEach((x,idx)=>{
+    if(x.sourceType==="set"){
+     const instance=String(x.setInstance||"");
+     const key="SET|"+instance+"|"+String(x.set||"");
+     if(!groupMap.has(key)){
+      const g={type:"set",dept:x.dept||"",set:x.set||"",setName:x.setName||"",items:[]};
+      groupMap.set(key,g);
+      groups.push(g);
+     }
+     groupMap.get(key).items.push(x);
+    }else{
+     // รายการที่ไม่ได้มาจาก SET แสดงรวมเป็นหัวข้อ "ชุดรายการ"
+     let g=groupMap.get("DIRECT");
+     if(!g){
+      g={type:"direct",dept:"",set:"",setName:"ชุดรายการ",items:[]};
+      groupMap.set("DIRECT",g);
+      groups.push(g);
+     }
+     g.items.push(x);
+    }
+   });
+
+   groups.forEach(g=>{
+    // แถวชื่อชุดตามรูปแบบตัวอย่าง: A ว่าง, B="ชุดรายการ", C=ชื่อชุด
+    pointRows.push(["", "ชุดรายการ", g.setName||"ชุดรายการ"]);
+    pointRows.push(pointHeader);
+    g.items.forEach(x=>pointRows.push([
+     x.dept||"",
+     x.code||"",
+     x.name||"",
+     Number(x.build)||0,
+     Number(x.remove)||0,
+     Number(x.reuse)||0,
+     x.unit||"",
+     x.note||""
+    ]));
+    pointRows.push([]);
+   });
+
+   pointRows.push([]);
+  });
+
+  // =====================================================
+  // Sheet 3: สรุปรวมพัสดุแยกแผนก — HT / LT / TR
+  // =====================================================
+  const deptTotals=new Map();
+  job.points.forEach(p=>(p.items||[]).forEach(x=>{
+   const d=String(x.dept||"").trim().toUpperCase();
+   const code=String(x.code||"").trim();
+   if(!d||!code)return;
+   const key=d+"|"+code;
+   if(!deptTotals.has(key)){
+    deptTotals.set(key,{
+     dept:d,code,name:x.name||"",build:0,remove:0,reuse:0,
+     unit:x.unit||"",note:x.note||""
+    });
+   }
+   const t=deptTotals.get(key);
+   t.build+=Number(x.build)||0;
+   t.remove+=Number(x.remove)||0;
+   t.reuse+=Number(x.reuse)||0;
+   if(!t.name&&x.name)t.name=x.name;
+   if(!t.unit&&x.unit)t.unit=x.unit;
+   if(!t.note&&x.note)t.note=x.note;
+  }));
+
+  // Sheet 3 layout: เริ่มข้อมูลที่คอลัมน์ A
+  // A = ลำดับที่, B = รหัสพัสดุ, C = ชื่ออุปกรณ์,
+  // D = ก่อสร้าง, E = รื้อถอน, F = นำกลับมาใช้
+  const deptRows=[];
+  deptRows.push([job.name||"งาน"]);
+  deptRows.push([]);
+  deptRows.push(["สรุปรวมพัสดุแยกแผนก"]);
+  deptRows.push([]);
+  ["HT","LT","TR"].forEach(d=>{
+   const rows=[...deptTotals.values()].filter(x=>x.dept===d);
+   if(!rows.length)return;
+   deptRows.push([dep[d]]);
+   deptRows.push(["ลำดับที่","รหัสพัสดุ","ชื่ออุปกรณ์","ก่อสร้าง","รื้อถอน","นำกลับมาใช้"]);
+   rows.forEach((x,i)=>deptRows.push([
+    i+1,x.code,x.name,x.build,x.remove,x.reuse
+   ]));
+   deptRows.push([]);
+  });
+
+  const wb=XLSX.utils.book_new();
+  const wsSummary=XLSX.utils.aoa_to_sheet(summaryRows);
+  const wsPoints=XLSX.utils.aoa_to_sheet(pointRows);
+  const wsDept=XLSX.utils.aoa_to_sheet(deptRows);
+
+  const summaryWidths=[
+   {wch:10},{wch:16},{wch:58},{wch:12},
+   {wch:12},{wch:16},{wch:10},{wch:38}
+  ];
+  const pointWidths=[
+   {wch:10},{wch:18},{wch:58},{wch:12},
+   {wch:12},{wch:16},{wch:10},{wch:38}
+  ];
+  wsSummary["!cols"]=summaryWidths;
+  wsPoints["!cols"]=pointWidths;
+  // รูปแบบคอลัมน์ของ "สรุปแยกแผนก" ให้เริ่มที่คอลัมน์ A
+  wsDept["!cols"]=[
+   {wch:16}, // A ลำดับที่
+   {wch:16}, // B รหัสพัสดุ
+   {wch:58}, // C ชื่ออุปกรณ์
+   {wch:12}, // D ก่อสร้าง
+   {wch:12}, // E รื้อถอน
+   {wch:16}  // F นำกลับมาใช้
+  ];
+  wsDept["!rows"]=deptRows.map((_,i)=>({hpt:i===0?22:(i===2?20:18)}));
+
+  if(summaryRows.length>=3)wsSummary["!autofilter"]={ref:`A3:H${Math.max(3,summaryRows.length)}`};
+
+  // ให้ "สรุปแยกแผนก" เป็น Sheet แรก โดยไม่เปลี่ยน Sheet อื่น
+  XLSX.utils.book_append_sheet(wb,wsDept,"สรุปแยกแผนก");
+  XLSX.utils.book_append_sheet(wb,wsSummary,"สรุปรวมรายการ");
+  XLSX.utils.book_append_sheet(wb,wsPoints,"รายการแยกตามจุด");
+
+   // ข้อมูลสำหรับ Import: เก็บโครงสร้างงานจริงไว้เป็น Save Game โดยไม่กระทบ 3 Sheet รายงานเดิม
+   // Excel จำกัดข้อความใน 1 cell ไม่เกิน 32,767 ตัวอักษร
+   // แบ่ง Save Game เป็นหลายแถวเพื่อให้ Export ได้แม้งานมีหลายจุด/หลาย SET
+   const saveJson=JSON.stringify({name:job.name||"งาน",points:job.points||[],currentPoint});
+   const saveChunkSize=30000;
+   const saveData=[["__PEA_FUSE_SAVE_JSON__",saveJson.slice(0,saveChunkSize)]];
+   for(let i=saveChunkSize;i<saveJson.length;i+=saveChunkSize){
+    saveData.push(["",saveJson.slice(i,i+saveChunkSize)]);
+   }
+   saveData.push(["หมายเหตุ","Sheet นี้ใช้สำหรับ Import กลับเข้าเว็บเท่านั้น"]);
+   const wsSave=XLSX.utils.aoa_to_sheet(saveData);
+   wsSave["!cols"]=[{wch:28},{wch:120}];
+   XLSX.utils.book_append_sheet(wb,wsSave,"ข้อมูลสำหรับ Import");
+
+  const safe=(String(job.name||"งาน").replace(/[\\/:*?"<>|]/g,"_").trim()||"งาน");
+  const filename=safe+".xlsx";
+
+  XLSX.writeFile(wb,filename,{bookType:"xlsx",compression:true});
+
+  const box=document.getElementById("exportModalBody");
+  if(box){
+   box.innerHTML=`<p><b>สร้างไฟล์ Excel เรียบร้อยแล้วครับ</b></p>
+    <p class="mini">ไฟล์มี 4 Sheet: <b>สรุปรวมรายการ</b>, <b>รายการแยกตามจุด</b>, <b>สรุปแยกแผนก</b> และ <b>ข้อมูลสำหรับ Import</b></p>`;
+   document.getElementById("exportModalTitle").textContent="Export Excel";
+   document.getElementById("exportModal").classList.add("show");
+  }
+ }catch(err){
+  console.error(err);
+  alert("Export Excel ไม่สำเร็จ: "+(err.message||err));
+ }
+}
+
+function fmt3(v){
+ const n=Number(v)||0;
+ return Number(n.toFixed(3)).toString();
+}
+function showSummary(){
+ let map=new Map();
+ job.points.forEach(p=>(p.items||[]).forEach(x=>{
+   const key=String(x.code||"").trim();
+   if(!key)return;
+   if(!map.has(key))map.set(key,{...x,build:0,remove:0,reuse:0});
+   let a=map.get(key);
+   a.build+=Number(x.build)||0;
+   a.remove+=Number(x.remove)||0;
+   a.reuse+=Number(x.reuse)||0;
+ }));
+ let rows=[...map.values()];
+ let body=rows.length
+  ? `<table><tr><th>ลำดับที่</th><th>รหัสพัสดุ</th><th>ชื่อรายการ</th><th>ก่อสร้าง</th><th>รื้อถอน</th><th>นำกลับมาใช้</th><th>หน่วย</th><th>หมายเหตุ</th></tr>${rows.map((x,i)=>{
+    const photo=getRealPhotoForItem(x);
+    const photoHtml=showRealPhotosState
+      ? (photo
+        ? `<img class="real-photo-inline" src="${esc(realPhotoUrl(photo))}" alt="${esc(x.name||x.code)}" title="คลิกเพื่อเปิดภาพ" onclick="window.open(this.src,'_blank')" onerror="this.style.display='none'">`
+        : `<span class="real-photo-missing">ไม่มีภาพ</span>`)
+      : "";
+    return `<tr><td>${i+1}</td><td><b>${esc(x.code)}</b>${photoHtml}</td><td>${esc(x.name)}</td><td>${fmt3(x.build)}</td><td>${fmt3(x.remove)}</td><td>${fmt3(x.reuse)}</td><td>${esc(x.unit)}</td><td>${esc(x.note)}</td></tr>`;
+  }).join("")}</table>`
+  : "<div class='empty'>ยังไม่มีรายการ</div>";
+ document.getElementById("summaryBody").innerHTML=body;
+ showPage("summary");
+}
+
+function showDeptSummary(){
+  const dep={
+    HT:"HT — แรงสูง",
+    LT:"LT — แรงต่ำ",
+    TR:"TR — หม้อแปลง"
+  };
+
+  const deptMaps={HT:new Map(),LT:new Map(),TR:new Map()};
+
+  (job?.points||[]).forEach(p=>(p.items||[]).forEach(x=>{
+    const d=String(x.dept||"").trim().toUpperCase();
+    const code=String(x.code||"").trim();
+    if(!deptMaps[d]||!code)return;
+
+    if(!deptMaps[d].has(code)){
+      deptMaps[d].set(code,{
+        ...x,
+        build:0,
+        remove:0,
+        reuse:0
+      });
+    }
+
+    const a=deptMaps[d].get(code);
+    a.build+=Number(x.build)||0;
+    a.remove+=Number(x.remove)||0;
+    a.reuse+=Number(x.reuse)||0;
+    if(!a.name&&x.name)a.name=x.name;
+    if(!a.unit&&x.unit)a.unit=x.unit;
+    if(!a.note&&x.note)a.note=x.note;
+  }));
+
+  const html=["HT","LT","TR"].map(d=>{
+    const rows=[...deptMaps[d].values()];
+
+    if(!rows.length){
+      return `<div style="margin-bottom:22px">
+        <h3 style="margin:0 0 10px;color:${d==="HT"?"#b91c1c":d==="LT"?"#0369a1":"#854d0e"}">${d==="HT"?"🔴":d==="LT"?"🔵":"🟡"} ${dep[d]}</h3>
+        <div class="empty">ยังไม่มีรายการ</div>
+      </div>`;
+    }
+
+    return `<div style="margin-bottom:22px">
+      <h3 style="margin:0 0 10px;color:${d==="HT"?"#b91c1c":d==="LT"?"#0369a1":"#854d0e"}">${d==="HT"?"🔴":d==="LT"?"🔵":"🟡"} ${dep[d]}</h3>
+      <table>
+        <tr><th>ลำดับที่</th><th>รหัสพัสดุ</th><th>ชื่อรายการ</th><th>ก่อสร้าง</th><th>รื้อถอน</th><th>นำกลับมาใช้</th><th>หน่วย</th><th>หมายเหตุ</th></tr>
+        ${rows.map((x,i)=>`<tr>
+          <td>${i+1}</td>
+          <td><b>${esc(x.code)}</b></td>
+          <td>${esc(x.name)}</td>
+          <td>${fmt3(x.build)}</td>
+          <td>${fmt3(x.remove)}</td>
+          <td>${fmt3(x.reuse)}</td>
+          <td>${esc(x.unit)}</td>
+          <td>${esc(x.note)}</td>
+        </tr>`).join("")}
+      </table>
+    </div>`;
+  }).join("");
+
+  document.getElementById("deptSummaryBody").innerHTML=html;
+  showPage("deptSummary");
+  if(typeof updateBackgroundForPage==="function"){
+    requestAnimationFrame(()=>updateBackgroundForPage("deptSummary"));
+  }
+}
+
+function toggleRealPhotos(){
+ showRealPhotosState=!showRealPhotosState;
+ const btn=document.getElementById("realPhotoToggleBtn");
+ if(btn){
+  btn.textContent=showRealPhotosState?"📷 ซ่อนภาพของจริง":"📷 แสดงภาพของจริง";
+  btn.classList.toggle("primary",showRealPhotosState);
+  btn.classList.toggle("secondary",!showRealPhotosState);
+ }
+ showSummary();
+}
+
+function getRealPhotoForItem(item){
+ const m=(DB.materials[item.dept]||[]).find(x=>String(x.code)===String(item.code));
+ return m?String(m.realPhoto||"").trim():"";
+}
+
+function realPhotoUrl(id){
+ const s=String(id||"").trim();
+ if(!s)return "";
+ if(/^https?:\/\//i.test(s))return s;
+ return "https://drive.google.com/thumbnail?id="+encodeURIComponent(s)+"&sz=w1200&t="+Date.now();
+}
+
+function renderRealPhotos(){
+ const grid=document.getElementById("realPhotoGrid");
+ if(!grid)return;
+ const map=new Map();
+ (job?.points||[]).forEach(p=>(p.items||[]).forEach(x=>{
+  const photo=getRealPhotoForItem(x);
+  if(photo && !map.has(String(x.dept)+"|"+String(x.code))){
+   map.set(String(x.dept)+"|"+String(x.code),{dept:x.dept,code:x.code,name:x.name,photo});
+  }
+ }));
+ const photos=[...map.values()];
+ if(!photos.length){
+  grid.innerHTML=`<div class="real-photo-empty">ยังไม่มีภาพของจริงในรายการนี้ หรือยังไม่ได้ใส่ File ID ในคอลัมน์ <b>ภาพของจริง</b></div>`;
+  return;
+ }
+ grid.innerHTML=photos.map(x=>{
+  const url=realPhotoUrl(x.photo);
+  return `<div class="real-photo-card"><img src="${esc(url)}" alt="${esc(x.name||x.code)}" title="คลิกเพื่อเปิดภาพ" onclick="window.open(this.src,'_blank')" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('beforebegin','<div class=\"real-photo-empty\">โหลดภาพไม่ได้</div>')"><div class="real-photo-code">${esc(x.code)}</div><div class="real-photo-name">${esc(x.name||"")}</div></div>`;
+ }).join("");
+}
+
+function openDBStatus(){document.getElementById("dbModal").classList.add("show");renderDBStatus()}
+function renderDBStatus(){let counts=`HT ${DB.materials.HT.length.toLocaleString()} · LT ${DB.materials.LT.length.toLocaleString()} · TR ${DB.materials.TR.length.toLocaleString()} · ชุด ${DB.sets.length.toLocaleString()} · SET_ITEMS ${DB.items.length.toLocaleString()}`;document.getElementById("dbStatusBody").innerHTML=`<p class="mini">SETS อ่านช่วง A2:G แบบอัตโนมัติจาก Google Sheet</p><p><span class="status ${DB.ready?"":"bad"}">${DB.ready?"เชื่อมต่อแล้ว":"ยังโหลดไม่สำเร็จ"}</span></p><p><b>${counts}</b></p>${DB.errors.length?`<div class="notice"><b>ชีตที่มีปัญหา</b><br>${DB.errors.map(esc).join("<br>")}</div>`:"<p>ไม่พบข้อผิดพลาดในการโหลด 5 ตาราง</p>"}`}
+function norm(s){return String(s??"").trim().toLowerCase().replace(/[\s_()\-]/g,"")}
+function get(row,names){for(let n of names){let k=Object.keys(row).find(x=>norm(x)===norm(n));if(k!==undefined)return row[k]}return ""}
+function parseCSV(text){let rows=[],row=[],cell="",q=false;for(let i=0;i<text.length;i++){let ch=text[i],nx=text[i+1];if(ch==='"'){if(q&&nx==='"'){cell+='"';i++}else q=!q}else if(ch===","&&!q){row.push(cell);cell=""}else if((ch==="\n"||ch==="\r")&&!q){if(ch==="\r"&&nx==="\n")i++;row.push(cell);if(row.some(x=>x!==""))rows.push(row);row=[];cell=""}else cell+=ch}if(cell||row.length){row.push(cell);rows.push(row)}let head=rows.shift()||[];return rows.map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]??""])))}
+function fetchSheet(name){
+ return new Promise((resolve,reject)=>{
+  const cb="__gviz_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+  const script=document.createElement("script");
+  let finished=false;
+
+  function cleanup(){
+   if(finished)return;
+   finished=true;
+   clearTimeout(timer);
+   try{delete window[cb]}catch(e){window[cb]=undefined}
+   if(script.parentNode)script.parentNode.removeChild(script);
+  }
+
+  const timer=setTimeout(()=>{
+   cleanup();
+   reject(new Error("หมดเวลารอ Google Sheets"));
+  },15000);
+
+  window[cb]=function(resp){
+   if(finished)return;
+   try{
+    if(!resp || resp.status!=="ok"){
+     const msg=resp && resp.errors && resp.errors[0] &&
+       (resp.errors[0].detailed_message || resp.errors[0].message);
+     throw new Error(msg || "Google Sheets ตอบกลับไม่สำเร็จ");
+    }
+
+    const cols=(resp.table&&resp.table.cols)||[];
+    const rows=(resp.table&&resp.table.rows)||[];
+
+    const data=rows.map(r=>{
+     const obj={};
+     cols.forEach((c,i)=>{
+      const cell=(r.c||[])[i];
+      const value = cell && cell.v!==undefined ? cell.v :
+       (cell && cell.f!==undefined ? cell.f : "");
+      obj[c.label||c.id||("Col"+(i+1))]=value;
+      obj["__col"+(i+1)]=value;
+     });
+     return obj;
+    });
+
+    cleanup();
+    resolve(data);
+   }catch(e){
+    cleanup();
+    reject(e);
+   }
+  };
+
+  script.onerror=function(){
+   cleanup();
+   reject(new Error("ไม่สามารถโหลดข้อมูลจาก Google Sheets"));
+  };
+
+  const setQuery = name==="SETS"
+    ? `&range=A2:G&tq=${encodeURIComponent("select * where B is not null")}`
+    : "";
+  const url=
+   `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq`+
+   `?tqx=${encodeURIComponent("out:json;responseHandler:"+cb)}`+
+   `&sheet=${encodeURIComponent(name)}`+
+   setQuery+
+   `&_=${Date.now()}`;
+
+  script.src=url;
+  script.async=true;
+  document.head.appendChild(script);
+ });
+}async function loadDatabase(){DB.ready=false;DB.errors=[];document.getElementById("dbHeader").textContent="กำลังโหลดฐานข้อมูล…";let results={};for(let s of SHEETS){try{results[s]=await fetchSheet(s)}catch(e){DB.errors.push(s+": "+e.message)}} 
+ const matNames={"MATERIALS(HT)":"HT","MATERIALS(LT)":"LT","MATERIALS(TR)":"TR"};
+ Object.entries(matNames).forEach(([sheet,d])=>{DB.materials[d]=(results[sheet]||[]).map(r=>({code:String(get(r,["รหัสพัสดุ","รหัสพัสดุ "])).trim(),name:String(get(r,["ชื่อรายการพัสดุ","ชื่อรายการ","ชื่อรายการ (แก้ไขได้)"])).trim(),unit:String(get(r,["หน่วย"])).trim(),note:String(get(r,["หมายเหตุ","หมายเหตุรายการ"])).trim(),status:String(get(r,["สถานะ"])).trim(),image2d:String(get(r,["ภาพ2D","ภาพ 2D","IMAGE2D","IMAGE_2D","2D","รูป2D","รูป 2D"])).trim(),image2dHeight:Number(get(r,["2D_สูง_m","2D สูง m","สูง2D","2D_HEIGHT_M","HEIGHT_2D_M","2D HEIGHT M"]))||0,realPhoto:String(get(r,["ภาพของจริง","รูปของจริง","ภาพจริง","รูปจริง","REALPHOTO","REAL_PHOTO","PHOTO_REAL","รูปภาพของจริง"])).trim()})).filter(x=>x.code)});
+ DB.items=(results["SET_ITEMS"]||[]).map(r=>({
+  dept:String(get(r,["รหัสแผนก","แผนก"])).trim().toUpperCase(),
+  set:String(get(r,["รหัสชุด","รหัสชุดอุปกรณ์","SET","SET_ID"])).trim(),
+  setName:String(get(r,["ชื่อชุด","ชื่อชุดอุปกรณ์","ชื่อชุดรายการ","ชื่อชุด/ชุดอุปกรณ์","รายการชุด","ชื่อ Set","Set Name","SET_NAME"])).trim(),
+  code:String(get(r,["รหัสพัสดุ"])).trim(),
+  name:String(get(r,["ชื่อรายการ","ชื่อรายการพัสดุ"])).trim(),
+  qty:Number(get(r,["จำนวน"]))||0,
+  unit:String(get(r,["หน่วย"])).trim(),
+  note:String(get(r,["หมายเหตุรายการ","หมายเหตุ"])).trim()
+})).filter(x=>x.set&&x.code);
+ DB.sets=(results["SETS"]||[]).map(r=>({
+  dept:String(get(r,["รหัสแผนก","แผนก"])||r.__col1).trim().toUpperCase(),
+  code:String(get(r,["รหัสชุด","รหัสชุดอุปกรณ์","SET","SET_ID"])||r.__col2).trim(),
+  name:String(
+    get(r,["ชื่อชุด","ชื่อชุดอุปกรณ์","ชื่อชุดรายการ","ชื่อชุด/ชุดอุปกรณ์","รายการชุด","ชื่อ Set","Set Name","SET_NAME","SETNAME","SET_NAME_TH","ชื่อชุด (ไทย)","ชื่อรายการ"]) ||
+    r.__col3 || ""
+  ).trim(),
+  note:String(get(r,["หมายเหตุชุด","หมายเหตุ"])||r.__col4||"").trim()
+ })).filter(x=>x.code);
+
+ // SETS เป็นแหล่งรายชื่อชุดเพียงแหล่งเดียว
+ // SET_ITEMS ใช้เติมรายละเอียดให้ SET ที่มีอยู่แล้วเท่านั้น
+ DB.items.forEach(x=>{
+  let existing=DB.sets.find(s=>s.dept===x.dept&&s.code===x.set);
+  if(existing && !existing.name && x.setName) existing.name=x.setName;
+  if(existing && !existing.name && x.name) existing.name=x.name;
+});
+ DB.ready=DB.errors.length===0 && (DB.materials.HT.length+DB.materials.LT.length+DB.materials.TR.length)>0 && DB.items.length>0;
+ document.getElementById("dbHeader").innerHTML=DB.ready?`<span class="status">Google Sheet ✓</span> ${DB.materials.HT.length+DB.materials.LT.length+DB.materials.TR.length} Materials · ${DB.sets.length} Sets · ${DB.items.length} Set Items`:`<span class="status bad">Google Sheet ✕</span>`;
+ renderDBStatus();
+}
+
+// =====================================================
+// Dynamic Background — อ่านจาก Google Sheet ชื่อ "ภาพ BG"
+// โครงสร้างเดิมของเกมยังคงเดิม; ตาราง BG เป็นข้อมูลเสริมเท่านั้น
+// A=KEY, B=FILE_ID, C=DESCRIPTION, D=ACTIVE
+// =====================================================
+const BG_SHEET_NAME="ภาพ BG";
+const BG_CONFIG={};
+let bgCurrentKey="";
+
+function bgIsActive(v){
+ const s=String(v??"").trim().toLowerCase();
+ return ["true","1","yes","y","active","เปิด","ใช่"].includes(s);
+}
+
+function bgImageUrls(id){
+ const s=String(id||"").trim();
+ if(!s)return [];
+ if(/^https?:\/\//i.test(s))return [s];
+ const e=encodeURIComponent(s);
+ // Try the direct Google-hosted image first, then Drive thumbnail/view fallbacks.
+ return [
+  "https://lh3.googleusercontent.com/d/"+e+"=w2000",
+  "https://drive.google.com/thumbnail?id="+e+"&sz=w2000",
+  "https://drive.google.com/uc?export=view&id="+e
+ ];
+}
+
+function bgPageKey(pageId){
+ const map={
+  home:"background_home",
+  builder:"background_builder",
+  summary:"background_summary",
+  deptSummary:"background_deptSummary"
+ };
+ return map[pageId]||"";
+}
+
+function updateBackgroundForPage(pageId){
+ const layer=document.getElementById("dynamicBgLayer");
+ const img=layer?layer.querySelector("img"):null;
+ const key=bgPageKey(pageId);
+ const cfg=key?BG_CONFIG[String(key).trim().toLowerCase()]:null;
+ bgCurrentKey=key;
+
+ // Background is painted on BODY, never as a layer above the game UI.
+ if(!cfg||!cfg.active||!cfg.fileId){
+  if(document.body)document.body.style.backgroundImage="";
+  if(img)img.removeAttribute("src");
+  return;
+ }
+
+ const urls=bgImageUrls(String(cfg.fileId).trim());
+ if(!urls.length)return;
+
+ let attempt=0;
+ const cacheKey="&t="+Date.now();
+ const apply=(url)=>{
+  if(bgCurrentKey!==key)return;
+  if(document.body){
+   document.body.style.backgroundImage='url("'+String(url).replace(/"/g,'\\"')+'")';
+  }
+ };
+
+ if(!img){
+  apply(urls[0]+cacheKey);
+  return;
+ }
+
+ img.onload=()=>{
+  if(bgCurrentKey!==key)return;
+  apply(img.src);
+ };
+ img.onerror=()=>{
+  if(bgCurrentKey!==key)return;
+  attempt++;
+  if(attempt<urls.length){
+   img.src=urls[attempt]+cacheKey;
+  }else{
+   console.warn("โหลดภาพพื้นหลังไม่ได้:",key,cfg.fileId);
+  }
+ };
+ img.src=urls[0]+cacheKey;
+}
+
+async function loadBackgroundConfig(){
+ try{
+  const rows=await fetchSheet(BG_SHEET_NAME);
+
+  Object.keys(BG_CONFIG).forEach(k=>delete BG_CONFIG[k]);
+
+  rows.forEach(r=>{
+   const key=String(get(r,["KEY","Key","key"])).trim().toLowerCase();
+   const fileId=String(get(r,["FILE_ID","FILE ID","File ID","file_id"])).trim();
+
+   if(!key||!fileId)return;
+
+   BG_CONFIG[key]={
+    fileId,
+    description:String(get(r,["DESCRIPTION","Description","คำอธิบาย"])).trim(),
+    active:bgIsActive(get(r,["ACTIVE","Active","active"]))
+   };
+  });
+
+  // ใช้หน้าที่กำลังเปิดอยู่เป็นตัวกำหนด KEY ของภาพพื้นหลัง
+  updateBackgroundForPage(document.querySelector(".page.active")?.id||"home");
+ }catch(e){
+  // BG เป็นระบบเสริม ถ้า Sheet นี้โหลดไม่ได้ เกมหลักยังทำงานตามเดิม
+  console.warn("โหลดภาพพื้นหลังไม่สำเร็จ",e);
+  const layer=document.getElementById("dynamicBgLayer");
+  if(layer)layer.style.display="none";
+ }
+}
+
+
+let showRealPhotosState=false;
+let sim2dZoomLevel=1;
+let sim2dSelected=null;
+let sim2dObjects=[];
+
+function sim2dFileIdToUrl(id){
+ const s=String(id||"").trim();
+ if(!s)return "";
+ if(/^https?:\/\//i.test(s))return s;
+ return "https://drive.google.com/uc?export=download&id="+encodeURIComponent(s)+"&t="+Date.now();
+}
+function sim2dThumbUrl(id){
+ const s=String(id||"").trim();
+ if(!s)return "";
+ if(/^https?:\/\//i.test(s))return s;
+ return "https://drive.google.com/thumbnail?id="+encodeURIComponent(s)+"&sz=w2000&t="+Date.now();
+}
+function sim2dGetImageForItem(item){
+ const m=(DB.materials[item.dept]||[]).find(x=>String(x.code)===String(item.code));
+ return m?{fileId:m.image2d||"",heightCm:Number(m.image2dHeight)||0}:{fileId:"",heightCm:0};
+}
+function sim2dGetBuildItems(){
+ const p=job?.points?.[currentPoint];
+ if(!p)return [];
+ const result=[];
+ (p.items||[]).forEach((item,itemIndex)=>{
+   const build=Number(item.build)||0;
+   const meta=sim2dGetImageForItem(item);
+   const fileId=meta.fileId;
+   if(build<=0||!fileId)return;
+   const count=Math.max(1,Math.round(build));
+   for(let n=1;n<=count;n++){
+     result.push({
+       key:itemIndex+"_"+n+"_"+item.code,
+       itemIndex,
+       n,
+       code:item.code,
+       name:item.name,
+       dept:item.dept,
+       fileId,
+       url:sim2dFileIdToUrl(fileId),
+       heightCm:meta.heightCm,
+       thumb:sim2dThumbUrl(fileId)
+     });
+   }
+ });
+ return result;
+}
+function openSimulation2D(){
+ if(!job||!job.points?.[currentPoint]){
+   alert("กรุณาสร้างงานและเลือกจุดก่อน");
+   return;
+ }
+ sim2dSelected=null;
+ sim2dObjects=[];
+ document.getElementById("simulation2DModal").classList.add("show");
+ renderSimulation2D();
+}
+function renderSimulation2D(){
+ const p=job.points[currentPoint];
+ document.getElementById("sim2dPoint").textContent="จุดที่ "+(p.pointNo||currentPoint+1)+" — "+(p.pointName||"");
+ const items=sim2dGetBuildItems();
+ document.getElementById("sim2dCount").textContent="พบ "+items.length+" ชิ้น";
+ const list=document.getElementById("sim2dList");
+ if(!items.length){
+   list.innerHTML='<div class="empty">ไม่พบอุปกรณ์ที่มีภาพ 2D<br><br>ต้องมี <b>ก่อสร้าง &gt; 0</b><br>และมี <b>File ID</b> ในคอลัมน์ ภาพ2D</div>';
+ }else{
+   list.innerHTML=items.map(it=>`
+    <div class="sim2d-card" data-sim-key="${esc(it.key)}" onclick="sim2dSelectFromLeft('${esc(it.key)}')">
+      <div class="sim2d-thumb">
+        <img src="${esc(it.thumb||it.url)}" alt=""
+          onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='${esc(it.url)}'}else{this.style.display='none';this.parentElement.innerHTML='<span style=&quot;color:#b91c1c;font-size:12px;text-align:center&quot;>โหลดรูปไม่ได้<br>ตรวจ File ID / สิทธิ์แชร์</span>'}">
+      </div>
+      <div class="sim2d-title">${esc(it.name)}</div>
+      <div class="sim2d-meta">${esc(it.code)} · ${esc(it.dept)} · ชิ้นที่ ${it.n} / ${Math.max(1,Math.round(Number(job.points[currentPoint].items[it.itemIndex].build)||0))}</div>
+    </div>`).join("");
+ }
+ const stage=document.getElementById("sim2dStage");
+ stage.innerHTML="";
+ sim2dObjects=[];
+}
+function sim2dSelectFromLeft(key){
+ const it=sim2dGetBuildItems().find(x=>x.key===key);
+ if(!it)return;
+
+ let obj=sim2dObjects.find(o=>o.it.itemIndex===it.itemIndex && o.it.n===it.n);
+
+ // Not placed yet: create exactly this build-copy.
+ if(!obj){
+   const i=sim2dObjects.length;
+   obj=sim2dAddObject(it,80+(i%4)*220,70+Math.floor(i/4)*150);
+ }
+ sim2dSelect(obj);
+ sim2dRefreshCounts();
+}
+function sim2dPlace(key){
+ const it=sim2dGetBuildItems().find(x=>x.key===key);
+ if(!it)return;
+
+ const sourceCount=sim2dGetBuildItems().filter(x=>x.itemIndex===it.itemIndex).length;
+ const placedCount=sim2dObjects.filter(o=>o.it.itemIndex===it.itemIndex).length;
+
+ if(placedCount>=sourceCount){
+   return;
+ }
+
+ const i=sim2dObjects.length;
+ const o=sim2dAddObject(it,80+(i%4)*220,70+Math.floor(i/4)*150);
+ sim2dSelect(o);
+ sim2dRefreshCounts();
+}
+function sim2dRefreshCounts(){
+ const items=sim2dGetBuildItems();
+ items.forEach(it=>{
+   const cards=document.querySelectorAll(`.sim2d-card[data-sim-key="${CSS.escape(it.key)}"]`);
+   const isPlaced=sim2dObjects.some(o=>o.it.itemIndex===it.itemIndex && o.it.n===it.n);
+   const isSelected=sim2dSelected && sim2dSelected.it.itemIndex===it.itemIndex && sim2dSelected.it.n===it.n;
+   cards.forEach(card=>{
+     card.style.opacity="1";
+     card.style.cursor="pointer";
+     card.style.pointerEvents="auto";
+     card.classList.toggle("placed",isPlaced);
+     card.classList.toggle("left-selected",!!isSelected);
+     card.setAttribute("aria-disabled","false");
+   });
+ });
+ const count=document.getElementById("sim2dCount");
+ if(count)count.textContent=`วางแล้ว ${sim2dObjects.length} / ${items.length} ชิ้น`;
+}
+// QCAD drawings are authored in centimeters.
+// One shared display scale keeps all materials proportional to each other.
+const SIM2D_POLE_HEIGHT_M=12.20;
+const SIM2D_POLE_HEIGHT_PX=680;
+const SIM2D_PX_PER_M=SIM2D_POLE_HEIGHT_PX/SIM2D_POLE_HEIGHT_M;
+
+function sim2dApplyHeightScale(img,it){
+ if(!img||!it)return;
+ const h=Number(it.heightCm)||0;
+ if(h<=0)return;
+
+ const pxH=Math.max(8,h*SIM2D_PX_PER_M);
+ img.style.height=pxH.toFixed(2)+"px";
+ img.style.width="auto";
+ img.style.maxHeight="none";
+ img.style.maxWidth="none";
+
+ const obj=img.closest(".sim2d-object");
+ if(obj){
+   obj.style.height="auto";
+   obj.style.width="auto";
+   obj.style.minWidth="0";
+   obj.style.minHeight="0";
+ }
+}
+
+function sim2dAddObject(it,x,y){
+ const stage=document.getElementById("sim2dStage");
+ const el=document.createElement("div");
+ el.className="sim2d-object";
+ el.style.left=Math.max(4,x)+"px";
+ el.style.top=Math.max(4,y)+"px";
+ el.dataset.baseX=String(Math.max(4,x));
+ el.dataset.baseY=String(Math.max(4,y));
+ el.dataset.angle="0";
+ el.dataset.flipX="1";
+ el.innerHTML=`<img src="${esc(it.thumb||it.url)}" draggable="false"
+   onerror="if(this.dataset.fallback!=="1"){this.dataset.fallback="1";this.src="${esc(it.url)}"}else{this.style.display="none"}">
+   <span class="sim2d-select-arrow">➤</span>`;
+ stage.appendChild(el);
+
+ const obj={el,it,x:Math.max(4,x),y:Math.max(4,y),angle:0,flipX:1};
+ sim2dObjects.push(obj);
+ sim2dRefreshCounts();
+
+ const img=el.querySelector("img");
+ const apply=()=>{sim2dApplyHeightScale(img,it);sim2dApplyCamera();};
+ if(img.complete) apply(); else img.addEventListener("load",apply,{once:true});
+
+ // This flag is used by the single delegated pointer handler below.
+ el._simObj=obj;
+ return obj;
+}
+function sim2dSelect(obj){
+ sim2dObjects.forEach(o=>{o.el.classList.remove("selected");});
+ sim2dSelected=obj;
+ if(obj){
+   obj.el.classList.add("selected");
+   obj.el.style.zIndex="999";
+   obj.el._simObj=obj;
+   sim2dObjects.forEach(o=>{if(o!==obj)o.el.style.zIndex="1";});
+ }
+ if(typeof sim2dRefreshCounts==="function")sim2dRefreshCounts();
+}
+function sim2dApplyCamera(){
+ const z=Number(sim2dZoomLevel)||1;
+ sim2dObjects.forEach(o=>{
+   const flip=o.flipX||1;
+   o.el.style.left=o.x+"px";
+   o.el.style.top=o.y+"px";
+   o.el.style.transform=`scale(${z*flip},${z}) rotate(${Number(o.angle)||0}deg)`;
+ });
+ const label=document.getElementById("sim2dZoomLabel");
+ if(label)label.textContent=Math.round(z*100)+"%";
+}
+
+function sim2dRotate(deg){
+ if(!sim2dSelected)return;
+ sim2dSelected.angle=(Number(sim2dSelected.angle)||0)+deg;
+ sim2dSelected.el.dataset.angle=String(sim2dSelected.angle);
+ const flip=sim2dSelected.flipX||1;
+ sim2dSelected.el.style.transform=`scale(${sim2dZoomLevel*flip},${sim2dZoomLevel}) rotate(${sim2dSelected.angle}deg)`;
+}
+
+function sim2dMirror(){
+ if(!sim2dSelected)return;
+ sim2dSelected.flipX=(sim2dSelected.flipX||1)*-1;
+ sim2dSelected.el.dataset.flipX=String(sim2dSelected.flipX);
+ const a=Number(sim2dSelected.angle)||0;
+ sim2dSelected.el.style.transform=`scale(${sim2dZoomLevel*sim2dSelected.flipX},${sim2dZoomLevel}) rotate(${a}deg)`;
+}
+function sim2dDeleteSelected(){
+ if(!sim2dSelected)return;
+ sim2dSelected.el.remove();
+ sim2dObjects=sim2dObjects.filter(o=>o!==sim2dSelected);
+ sim2dSelected=null;
+}
+function sim2dClear(){
+ const stage=document.getElementById("sim2dStage");
+ if(stage)stage.innerHTML="";
+ sim2dObjects=[];sim2dSelected=null;
+sim2dRefreshCounts();
+}
+document.addEventListener("keydown",e=>{
+ if(!document.getElementById("simulation2DModal")?.classList.contains("show"))return;
+ if(e.key==="Delete")sim2dDeleteSelected();
+ if(e.key.toLowerCase()==="r")sim2dRotate(15);
+});
+
+
+
+(function setupSim2DMouse(){
+ const stage=document.getElementById("sim2dStage");
+ if(!stage)return;
+
+ let drag=null;
+
+ stage.addEventListener("mousedown",e=>{
+   if(e.button!==0)return;
+   const el=e.target.closest?.(".sim2d-object");
+   if(!el || !stage.contains(el))return;
+   const obj=el._simObj || sim2dObjects.find(o=>o.el===el);
+   if(!obj || sim2dSelected!==obj)return;
+
+   e.preventDefault();
+   e.stopPropagation();
+
+   drag={
+     obj,
+     sx:e.clientX,
+     sy:e.clientY,
+     ox:obj.x,
+     oy:obj.y
+   };
+   document.body.style.userSelect="none";
+ });
+
+ document.addEventListener("mousemove",e=>{
+   if(!drag)return;
+   e.preventDefault();
+
+   // Directly move the selected object. No missing camera function.
+   const z=Number(window.sim2dZoomLevel)||1;
+   drag.obj.x=drag.ox+(e.clientX-drag.sx)/z;
+   drag.obj.y=drag.oy+(e.clientY-drag.sy)/z;
+
+   drag.obj.el.style.left=drag.obj.x+"px";
+   drag.obj.el.style.top=drag.obj.y+"px";
+   drag.obj.el.dataset.baseX=String(drag.obj.x);
+   drag.obj.el.dataset.baseY=String(drag.obj.y);
+ });
+
+ document.addEventListener("mouseup",()=>{
+   if(!drag)return;
+   drag=null;
+   document.body.style.userSelect="";
+ });
+})();
+
+loadDatabase().catch(e=>{DB.errors.push(e&&e.message?e.message:String(e));const h=document.getElementById("dbHeader");if(h)h.innerHTML='<span class="status bad">Google Sheet ✕</span> โหลดฐานข้อมูลไม่สำเร็จ';});
+loadBackgroundConfig();
+</script>
+
+<div id="exportModal" class="modal">
+ <div class="modal-box" style="max-width:560px">
+  <div class="modal-head">
+   <h2 id="exportModalTitle">Export Excel</h2>
+   <button class="secondary" type="button" onclick="closeModal('exportModal')">ปิด</button>
+  </div>
+  <div id="exportModalBody"></div>
+ </div>
+</div>
+
+</body>
+</html>
