@@ -586,7 +586,7 @@ function updateLaborMeter(){
   // เข็มแสดงตำแหน่งปัจจุบันบนสเกล และหยุดที่ปลายขวาเมื่อเกิน 100%
   marker.style.left=fillPct+"%";
   meter.classList.toggle("over",pct>=100);
-  label.textContent=Math.round(total).toLocaleString("th-TH")+" / 380,000";
+  label.textContent=Math.round(total).toLocaleString("th-TH")+" / "+maxLabor.toLocaleString("th-TH");
 
   if(pct>100){
     status.textContent="เกิน 1 แฟ้ม";
