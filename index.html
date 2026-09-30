@@ -555,7 +555,7 @@ function ensurePointNumbers(){
 }
 
 function updateLaborMeter(){
-  const maxLabor=3800000;
+  const maxLabor=380000;
   let total=0;
   if(job && Array.isArray(job.points)){
     job.points.forEach(p=>(p.items||[]).forEach(x=>{
